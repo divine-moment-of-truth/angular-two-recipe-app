@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header"><h2>{{title}}</h2></div>
+  </div>
+</div> 
+<div class="m-b-18px">
+  <div class="col-m-12">
+    <a (click)="readRecipes()" class="btn btn-primary pull-right">
+      <span class="glyphicon glyphicon-plus"></span>Read Recipes
+    </a>
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="create_update_recipe_ingredient_detail_form" (ngSubmit)="upateRecipeIngredientDetails()">
+      <table class="table table-hover table-responsive table-bordered">
+        <tr>
+          <th>
+            Ingredient Name
+          </th>
+          <th>
+            Quantity
+          </th>
+          <th>
+            Comment
+          </th>
+        </tr>
+        <tr formArrayName="s_ingredientDetails" *ngFor="let ingredient of create_update_recipe_ingredient_detail_form.get('s_ingredientDetails').controls; let i=index">
+          <ng-container [formGroupName]='i'>
+            <td>
+              <div class="form-group">
+                <input name="ingredient_name" formControlName="ingredient_name" class="form-control" id="ingredient.ingredient_id" readonly /> 
+                <input type="hidden" id="hidden_ingredient_id" name="hidden_ingredient_id" formControlName="ingredient_id" />          
+              </div>
+            </td>
+            <td>
+              <div class="form-group">   
+                <input type="text" name="ingredient_qty" formControlName="ingredient_quantity" class="form-control" id="{{ingredient.ingredient_name}}" />
+              </div>
+            </td>
+            <td>
+              <div class="form-group">   
+                <input type="text" name="ingredient_cmt" formControlName="ingredient_comment" class="form-control" id="{{ingredient.ingredient_name}}" />
+              </div>
+            </td>
+          </ng-container>
+        </tr>
+        <tr>
+          <td>
+            <input type="hidden" id="hidden_recipe_id" name="hidden_recipe_id" formControlName="recipe_id" value="{{recipe_id}}" />             
+          </td>
+          <td>
+            <input type="hidden" id="hidden_total_ingredients" name="hidden_total_ingredients" formControlName="total_num_ingredients" /> 
+          </td>
+          <td>
+            <button id="update-ingredients-btn" type="submit" class="btn btn-primary">Update Recipe Ingredient Details</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

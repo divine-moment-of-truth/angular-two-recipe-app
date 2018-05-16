@@ -1,0 +1,18 @@
+.m-b-18px{ margin-bottom: 18px; }
+.m-r-5px{ margin-right: 5px; }
+.w-40-pct{ width: 40%; }
+.text-align-center{ text-align: center; }
+.checkbox-grid li { display: block; float: left; width: 25%;}
+
+textarea.form-control {
+    height: auto;
+}
+
+.checkbox-grid {
+    overflow:hidden ;
+    height: auto;
+}
+
+#selectFile {
+    float: left;
+}

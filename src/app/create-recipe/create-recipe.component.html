@@ -1,0 +1,265 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header"><h2>{{title}}</h2></div>
+  </div>
+</div> 
+<div class="m-b-18px">
+  <div class="col-m-12">
+    <a (click)="readRecipes()" class="btn btn-primary pull-right">
+      <span class="glyphicon glyphicon-plus"></span>Read Recipes
+    </a>
+  </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <form [formGroup]="create_recipe_form" (ngSubmit)="createRecipe()">
+    <!--<div [formGroup]="create_recipe_form" (ngSubmit)="createRecipe()">-->
+      <table class="table table-hover table-responsive table-bordered">
+        <tr>
+          <td>
+            Name
+          </td>
+          <td>
+            <input name="name" formControlName="name" type="text" class="form-control" required />
+            <div *ngIf="create_recipe_form.get('name').touched && create_recipe_form.get('name').hasError('required')"
+              class="alert alert-danger">Name is required
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Description
+          </td>
+          <td>
+            <textarea name="description" formControlName="description" class="form-control" required>
+
+            </textarea>
+            <div *ngIf="create_recipe_form.get('description').touched && create_recipe_form.get('description').hasError('required')"
+              class="alert alert-danger">
+              Description is required
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Category
+          </td>
+          <td>
+            <select formControlName="category_id" name="category_id" class="form-control" required>
+              <option *ngFor="let category of categories" value="{{category.category_id}}">
+                {{category.category_name}}
+              </option>
+            </select>
+            <div *ngIf="create_recipe_form.get('category_id').touched && create_recipe_form.get('category_id').hasError('required')"
+              class="alert alert-danger">Category is required
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+              Ingredients
+          </td>
+          <td>
+            <ul class="checkbox-grid" ngControlGroup="ingredients">
+              <li *ngFor="let ingredient of ingredients" value="{{ingredient.ingredient_id}}">
+                <input type="checkbox" id="{{ingredient.ingredient_name}}" ng-checked="ingredient.ingredient_checked" (change)="ingredientSelected($event, ingredient)"/>
+                <!--{{ingredient.ingredient_checked | json}}-->
+                <label for="{{ingredient.ingredient_name}}">{{ingredient.ingredient_name}}</label>
+              </li>
+            </ul>
+
+            <div *ngIf="!checkBoxesSelected"
+              class="alert alert-danger">At least one ingredient needs to be selected
+            </div>
+            <!--
+            <div *ngIf="create_recipe_form.get('ingredient_id').touched && create_recipe_form.get('ingredient_id').hasError('required')"
+              class="alert alert-danger">
+              At least one ingredient needs to be selected
+            </div>
+            -->
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Instruction One
+          </td>
+          <td>
+            <textarea name="instruction_one" formControlName="instruction_one" class="form-control" required>
+
+            </textarea>
+            <div *ngIf="create_recipe_form.get('instruction_one').touched && create_recipe_form.get('instruction_one').hasError('required')"
+              class="alert alert-danger">Instruction one required
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Instruction Two
+          </td>
+          <td>
+            <textarea name="instruction_two" formControlName="instruction_two" class="form-control">
+
+            </textarea>
+            <!--<div *ngIf="create_recipe_form.get('instruction_two').touched && create_recipe_form.get('instruction_two').hasError('required')"
+              class="alert alert-danger">Instruction one required
+            </div>
+            -->
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Instruction Three
+          </td>
+          <td>
+            <textarea name="instruction_three" formControlName="instruction_three" class="form-control">
+
+            </textarea>
+            <!--<div *ngIf="create_recipe_form.get('instruction_three').touched && create_recipe_form.get('instruction_three').hasError('required')"
+              class="alert alert-danger">Instruction one required
+            </div>
+            -->
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Instruction Four
+          </td>
+          <td>
+            <textarea name="instruction_four" formControlName="instruction_four" class="form-control">
+
+            </textarea>
+            <!--<div *ngIf="create_recipe_form.get('instruction_four').touched && create_recipe_form.get('instruction_four').hasError('required')"
+              class="alert alert-danger">Instruction one required
+            </div>
+            -->
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Instruction Five
+          </td>
+          <td>
+            <textarea name="instruction_five" formControlName="instruction_five" class="form-control">
+
+            </textarea>
+            <!--<div *ngIf="create_recipe_form.get('instruction_five').touched && create_recipe_form.get('instruction_five').hasError('required')"
+              class="alert alert-danger">Instruction one required
+            </div>
+            -->
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Instruction Six
+          </td>
+          <td>
+            <textarea name="instruction_six" formControlName="instruction_six" class="form-control">
+              
+            </textarea>
+            <!--<div *ngIf="create_recipe_form.get('instruction_six').touched && create_recipe_form.get('instruction_six').hasError('required')"
+              class="alert alert-danger">Instruction one required
+            </div>
+            -->
+          </td>
+        </tr>          
+
+        <tr>
+          <td>
+            Difficulty
+          </td>
+          <td>
+            <select formControlName="difficulty_id" name="difficulty_id" class="form-control" required>
+              <option *ngFor="let difficulty of difficulties" value="{{difficulty.difficulty_id}}">
+                {{difficulty.difficulty_descr}}
+              </option>
+            </select>
+            <div *ngIf="create_recipe_form.get('difficulty_id').touched && create_recipe_form.get('difficulty_id').hasError('required')"
+              class="alert alert-danger">Difficulty is required
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Healthy
+          </td>
+          <td>
+            <select name="healthy" formControlName="healthy" class="form-control" required>
+              <!--<option id="-1">Select</option>-->
+              <!--<option id="0" selected>No</option>-->
+              <option id="0">No</option>
+              <option id="1">Yes</option>
+            </select>
+            <div *ngIf="create_recipe_form.get('healthy').touched && create_recipe_form.get('healthy').hasError('required')"
+                class="alert alert-danger">Select whether recipe is healthy
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Preperation Time
+          </td>
+          <td>
+            <input name="preperation" formControlName="preperation" type="text" class="form-control" required />
+            <div *ngIf="create_recipe_form.get('preperation').touched && create_recipe_form.get('preperation').hasError('required')"
+              class="alert alert-danger">Preperation time is required
+            </div>
+          </td>
+        </tr>  
+        
+        <tr>
+          <td>
+            Vegetarian
+          </td>
+          <td>
+            <select name="vegetarian" formControlName="vegetarian" class="form-control" required>
+              <option id="0">No</option>
+              <option id="1">Yes</option>
+            </select>
+            <div *ngIf="create_recipe_form.get('vegetarian').touched && create_recipe_form.get('vegetarian').hasError('required')"
+              class="alert alert-danger">Select whether recipe is vegetarian
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Image
+          </td>
+          <td>
+            <!--<input name="selectFile" id="selectFile" type="file" class="form-control btn btn-success" (click)="chooseFileClicked()"/>-->
+            <input name="selectFile" id="selectFile" type="file" class="form-control btn btn-success" (click)="chooseFileClicked($event)"/>
+            <button type="button" class="btn btn-primary" (click)="uploadImage($event)" value="Upload Image">Upload Image</button>
+            <input name="image_id" formControlName="image_id" type="hidden" class="form-control" id="image_id" />
+            <div *ngIf="errorUploading" class="alert alert-danger">
+              {{imageReturnedText}}
+            </div>
+          </td>
+          <td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td>
+            <button class="btn btn-primary" type="submit" [disabled]="!create_recipe_form.valid || checkBoxesSelected == false">
+                <span class="glyphicon glyphicon-plus"></span> Create
+            </button>
+          </td>
+        </tr>
+      </table>
+    <!--</div>-->
+    </form>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!--<form (submit)="loginUser($event)">-->
+<form (ngSubmit)="loginUser($event)">
+  <div class="input">
+    <label>Username</label>
+    <input id="username" type="text"> 
+  </div>
+  <div class="input">
+    <label>Password</label>
+    <input id="password" type="password">
+  </div>
+  <div class="input">
+    <input id="submit" type="submit" value="login">
+    <div *ngIf="errorMsg != ''"
+      class="alert alert-danger">{{errorMsg}}
+    </div>
+  </div>
+</form>

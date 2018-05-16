@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header"><h2>{{title}}</h2></div>
+  </div>
+</div> 
+<div class="m-b-18px">
+    <div class="col-md-12">
+      <a (click)="createRecipe()"  class='btn btn-primary pull-right'>
+        <span class='glyphicon glyphicon-plus'></span> Create Recipe
+      </a> 
+    </div>
+</div>
+<br>
+<br>
+<div class="row">
+  <div class="col-md-12">
+    <table class='table table-hover table-responsive table-bordered'>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Difficulty</th>
+        <th>Healthy</th>
+        <th>Prep Time</th>
+        <th>Vegetarian</th>
+      </tr>
+      <tr *ngFor="let recipe of recipes">
+        <td>
+          <img [src]="recipe.Image_Path" width="120" height="120" />
+        </td>
+        <td>{{recipe.Recipe_Name}}</td>
+        <td>{{recipe.Recipe_Description}}</td>
+        <td>{{recipe.Category}}</td>
+        <td>{{recipe.Difficulty_Descr}}</td>
+        <td>{{recipe.Healthy}}</td>
+        <td>{{recipe.Preparation_Time}}</td>
+        <td>{{recipe.Vegetarian}}</td>
+        <td>
+          <a (click)="readOneRecipe(recipe.Recipe_Id)" class="btn btn-primary m-r-5px">
+            <span class='glyphicon glyphicon-eye-open'></span> Read
+          </a>
+        </td>
+        <td>
+          <a (click)="updateRecipe(recipe.Recipe_Id)" class="btn btn-primary m-r-5px">
+              <span class='glyphicon glyphicon-edit'></span> Edit
+          </a>
+        </td>
+        <td>
+          <a (click)="deleteRecipe(recipe.Recipe_Id)" class="btn btn-primary m-r-5px">
+              <span class='glyphicon glyphicon-remove'></span> Delete
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

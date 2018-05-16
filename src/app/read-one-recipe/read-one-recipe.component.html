@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header"><h2>{{title}}</h2></div>
+  </div>
+</div> 
+ <div class="row m-b-18px">
+    <div class="col-md-12">
+      <a (click)="readRecipes()" class='btn btn-primary pull-right' id="read-recipes-btn">
+          <span class='glyphicon glyphicon-list'></span> Read Recipes
+      </a>
+    </div>
+  </div>
+  <br>
+  <br>
+  <article>
+    <header class='header-section'>
+      <div class='header-section-image'>
+          <img [src]="recipe?.image_name_path" width="500" height="454" />
+      </div>
+      <div class='header-section-details'>
+        <div class='header-section-title'>
+            <h2>{{recipe?.recipe_name}}</h2>
+        </div>
+  
+        <div class='header-section-description'>
+            <p>{{recipe?.recipe_description}}</p>
+        </div>
+  
+        <div class='header-section-info'>
+            <ul class='list-inline'>
+                <li><h4><i class='fa fa-clock-o' aria-hidden='true'></i>{{recipe?.prep_time}}</h4></li>
+                <li *ngIf="recipe?.healthy == 'Yes'"><h4><i class='fa fa-heart' aria-hidden='true'></i>Healthy</h4></li>
+                <li><h4><i class='fa fa-hand-spock-o' aria-hidden='true'></i>{{recipe?.difficulty}}</h4></li>
+                <li *ngIf="recipe?.vegetarian == 'yes'"><h4><span class='vegetarianicon'>Ⓥ</span>Vegetarian</h4></li>
+            </ul>
+        </div>
+      </div>
+    </header>
+  
+    <div class='ingredient-instructions-sections'> 
+      <div class='row'>
+        <div class='col-md-4'> 
+          <section class='ingredients'>
+              <h2>Ingredients</h2>   
+              <ul *ngFor="let recipeIngredient of recipe_ingredient_details">
+                <li>
+                    {{recipeIngredient.ingredient}}  {{recipeIngredient.quantity}}  {{recipeIngredient.comments}}
+                </li>
+              </ul>
+          </section>
+        </div>
+  
+        <div class='col-md-1'></div> 
+  
+        <div class='col-md-4'>
+          <section class='instructions'>
+            <h2>Instructions</h2>
+            <ul class='list-inline'>
+              <div *ngIf="recipe?.instruction_one != ''">
+                <h4>Step 1</h4>
+                <li>{{recipe?.instruction_one}}</li>
+              </div>
+              <div *ngIf="recipe?.instruction_two != ''">
+                <h4>Step 2</h4>
+                <li>{{recipe?.instruction_two}}</li>
+              </div>
+              <div *ngIf="recipe?.instruction_three != ''">
+                <h4>Step 3</h4>
+                <li>{{recipe?.instruction_three}}</li>
+              </div>
+              <div *ngIf="recipe?.instruction_four != ''">
+                <h4>Step 4</h4>
+                <li>{{recipe?.instruction_four}}</li>
+              </div>
+              <div *ngIf="recipe?.instruction_five != ''">
+                <h4>Step 5</h4>
+                <li>{{recipe?.instruction_five}}</li>
+              </div>
+              <div *ngIf="recipe?.instruction_six != ''">
+                <h4>Step 6</h4>
+                <li>{{recipe?.instruction_six}}</li>
+              </div>
+            </ul>
+          </section>
+        </div> 
+  
+        <div class='col-md-3'></div>
+      </div>      
+    </div>
+  </article>
